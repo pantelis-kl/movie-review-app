@@ -10,6 +10,9 @@ class MovieReview{
         this.moviesContainer=document.querySelector(".movies-container");
         this.movieImage=document.getElementById("movie-image");
         this.movieDescr=document.getElementById("movie-description");
+        this.releaseDate=document.getElementById("release-date");
+        this.runtime=document.getElementById("runtime");
+        this.producerName=document.getElementById("producer-name");
         this.init();
     }
 
@@ -126,6 +129,7 @@ class MovieReview{
             this.getMovieTitle(movieData);
             this.getMovieImage(movieData);
             this.getMovieDescription(movieData);
+            this.getMovieDetails(movieDetailsData,movieCreditsData);
         }catch(error){
             console.error(error);
             this.getErrorMessage("Please enter a valid movie name");
@@ -145,6 +149,25 @@ class MovieReview{
 
     getMovieDescription(movieData){
         this.movieDescr.textContent=movieData.results[0].overview;
+    }
+
+    getMovieDetails(movieDetailsData,movieCreditsData){
+        this.releaseDate.textContent=`Release Date : ${movieDetailsData.release_date}`;
+        this.runtime.textContent=`Runtime : ${movieDetailsData.runtime} mins`;
+        this.producerName.textContent=`Producer : ${this.findDirector(movieCreditsData)}`;  
+    }
+
+    findDirector(movieCreditsData){
+        let directorName;
+
+        movieCreditsData.crew.forEach(movie=>{
+            if(movie.job==="Director"){
+                directorName= movie.original_name;
+            }
+        });
+        if(directorName===undefined)
+            directorName=movieCreditsData.crew[0].original_name;
+        return directorName;
     }
 
     getMovieId(movieData){

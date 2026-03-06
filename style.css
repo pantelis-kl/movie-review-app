@@ -154,6 +154,17 @@ main{
     font-size: 18px;
 }
 
+.movies-container .movie-details{
+    display: grid;
+    grid-template-columns: repeat(3,250px);
+    width: 50%;
+}
+
+.movies-container .movie-details h3{
+    font-size: 16px;
+    color: #fff;
+}
+
 @keyframes typing{
     from{width: 0ch;}
     to{width: 32.8ch;}
