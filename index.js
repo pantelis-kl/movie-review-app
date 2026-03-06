@@ -13,6 +13,8 @@ class MovieReview{
         this.releaseDate=document.getElementById("release-date");
         this.runtime=document.getElementById("runtime");
         this.producerName=document.getElementById("producer-name");
+        this.totalReviews=document.getElementById("total-reviews");
+        this.rating=document.getElementById("rating");
         this.init();
     }
 
@@ -130,6 +132,7 @@ class MovieReview{
             this.getMovieImage(movieData);
             this.getMovieDescription(movieData);
             this.getMovieDetails(movieDetailsData,movieCreditsData);
+            this.getVoteStats(movieData);
         }catch(error){
             console.error(error);
             this.getErrorMessage("Please enter a valid movie name");
@@ -168,6 +171,11 @@ class MovieReview{
         if(directorName===undefined)
             directorName=movieCreditsData.crew[0].original_name;
         return directorName;
+    }
+
+    getVoteStats(movieData){
+        this.totalReviews.textContent=`Total Reviews : ${movieData.results[0].vote_count}`;
+        this.rating.textContent=`Rating : ${(movieData.results[0].vote_average).toFixed(1)}`;
     }
 
     getMovieId(movieData){
