@@ -7,6 +7,10 @@ body{
     box-sizing: border-box;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 header{
     width: 100%;
     display: flex;
@@ -184,6 +188,10 @@ main{
     width: 50%;
     color: #fff;
     font-size: 18px;
+}
+
+.fa-solid.fa-users{
+    color: rgb(28, 88, 255);
 }
 
 @keyframes typing{

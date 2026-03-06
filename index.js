@@ -96,6 +96,7 @@ class MovieReview{
             return await response.json();
         }catch(error){
             console.error(error);
+            this.getErrorMessage("Please enter a valid movie name");
         }
     }
 
@@ -107,6 +108,7 @@ class MovieReview{
             return await response.json();
         }catch(error){
             console.error(error);
+            this.getErrorMessage("Please enter a valid movie name");
         }
     }
 
@@ -118,6 +120,7 @@ class MovieReview{
             return await response.json();
         }catch(error){
             console.error(error);
+            this.getErrorMessage("Please enter a valid movie name");
         }
     }
 
@@ -174,8 +177,22 @@ class MovieReview{
     }
 
     getVoteStats(movieData){
-        this.totalReviews.textContent=`Total Reviews : ${movieData.results[0].vote_count}`;
-        this.rating.textContent=`Rating : ${(movieData.results[0].vote_average).toFixed(1)}`;
+        this.totalReviews.innerHTML=`Total Reviews : ${movieData.results[0].vote_count} <i class="fa-solid fa-users"></i>`;
+        this.rating.textContent=`Rating : ${(movieData.results[0].vote_average).toFixed(1)} ${this.getMovieStars(movieData)}`;
+    }
+
+    getMovieStars(movieData){
+        const ratingNumber=movieData.results[0].vote_average;
+        if(ratingNumber>=1 && ratingNumber<3)
+            return "⭐";
+        else if(ratingNumber>=3 && ratingNumber<5)
+            return "⭐⭐";
+        else if(ratingNumber>=5 && ratingNumber<7)
+            return "⭐⭐⭐";
+        else if(ratingNumber>=7 && ratingNumber<9)
+            return "⭐⭐⭐⭐";
+        else
+            return "⭐⭐⭐⭐⭐";
     }
 
     getMovieId(movieData){
