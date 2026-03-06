@@ -1,0 +1,43 @@
+body{
+    background-color: rgb(22, 22, 22);
+    margin:0;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+header{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(46, 46, 46, 0.521);
+    padding: 20px;
+}
+
+navbar ul{
+    list-style-type: none;
+}
+
+navbar li{
+    display: inline;
+}
+
+navbar a{
+    text-decoration: none;
+    color:#ffff;
+    margin-left: 50px;
+    font-size: 25px;
+}
+
+
+navbar i{
+    margin-left: 5px;
+    font-size: 20px;
+}
+
+navbar a:hover{
+    color: rgb(109, 109, 109);
+    text-decoration:underline;
+}
