@@ -41,3 +41,84 @@ navbar a:hover{
     color: rgb(109, 109, 109);
     text-decoration:underline;
 }
+
+#search-movie{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#search-movie #search-movies-header{
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    animation: typing 3s ease-in-out;
+}
+
+
+.search-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.search-container input{
+    padding: 10px;
+    border-radius: 40px;
+    border: none;   
+    font-size: 20px;
+    width: 300px;
+}
+
+.search-container i{
+    align-self: center;
+    margin-left: 10px;
+    font-size: 25px;
+    color:rgb(0, 74, 211);
+    cursor: pointer;
+}
+
+.search-container i:hover{
+    color:rgb(35, 109, 247) ;
+}
+
+#search-movie #error-message{
+    color:rgb(206, 0, 0);
+    font-size: 18px;
+    align-self: center;
+}
+
+.full-loading{
+    display: flex;
+    flex-direction: row;
+    display: none;
+}
+
+.full-loading h3{
+    color: #fff;
+    font-size: 20px;
+}
+
+.full-loading #loading-dots{
+    letter-spacing: 2px;
+    margin-left: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 2ch;
+    animation: loadingType 1s linear infinite alternate;
+}
+
+@keyframes typing{
+    from{width: 0ch;}
+    to{width: 32.8ch;}
+}
+
+@keyframes loadingType{
+    from{width: 0ch;}
+    to{width: 2ch;}
+}

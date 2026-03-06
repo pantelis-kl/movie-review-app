@@ -1,6 +1,10 @@
 class MovieReview{
     constructor(){
         this.navbarItems=document.querySelectorAll(".navbar-item");
+        this.searchField=document.getElementById("search-input");
+        this.searchButton=document.getElementById("search-button");
+        this.errorMessage=document.getElementById("error-message");
+        this.loadingMessage=document.querySelector(".full-loading");
         this.init();
     }
 
@@ -26,6 +30,19 @@ class MovieReview{
                     this.deactivateNavabarItem(item);
             });
         });
+
+        this.searchButton.addEventListener("click",()=>{
+            this.fetchData();
+        });
+
+        this.searchField.addEventListener("keyup",event=>{
+            if(event.key===`Enter`)
+                this.fetchData();
+        });
+
+        document.querySelector(".movies-form").addEventListener("submit",event=>{
+            event.preventDefault();
+        })
     }
 
     customizeNavbarItems(index){
