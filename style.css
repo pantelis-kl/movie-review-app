@@ -7,6 +7,10 @@ body{
     box-sizing: border-box;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 header{
     width: 100%;
     display: flex;
@@ -152,6 +156,83 @@ main{
     letter-spacing: 1px;
     margin-left: 50px;
     font-size: 18px;
+}
+
+.movies-container .movie-details{
+    display: grid;
+    grid-template-columns: repeat(3,250px);
+    width: 50%;
+}
+
+.movies-container .movie-details h3{
+    font-size: 16px;
+    color: #fff;
+}
+
+.movies-container #reviews{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#reviews-header{
+    color: #ffff;
+    font-size: 30px;
+}
+
+#reviews .review-stats{
+    display: grid;
+    grid-template-columns: repeat(2,400px);
+    width: 50%;
+    color: #fff;
+    font-size: 18px;
+}
+
+.fa-solid.fa-users, .fa-solid.fa-user{
+    color: rgb(28, 88, 255);
+}
+
+#reviews .review-authors{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+ .review-item{
+    width: 90%;
+    display: none;
+    flex-direction: column;
+    background-color: rgba(61, 61, 61, 0.521);
+    margin-top: 20px;
+    border-radius: 20px;
+}
+
+.review-item .rating-name-cont{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.review-item h3{
+    color: #ffff;
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.review-item .rating-name-cont .authors-rating{
+    margin-left: 70px;
+}
+
+.review-item .comment-content{
+    color: #ffff;
+}
+
+.fa-solid.fa-quote-left , .fa-solid.fa-quote-right{
+    color: rgb(23, 104, 255);
 }
 
 @keyframes typing{

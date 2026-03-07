@@ -10,6 +10,15 @@ class MovieReview{
         this.moviesContainer=document.querySelector(".movies-container");
         this.movieImage=document.getElementById("movie-image");
         this.movieDescr=document.getElementById("movie-description");
+        this.releaseDate=document.getElementById("release-date");
+        this.runtime=document.getElementById("runtime");
+        this.producerName=document.getElementById("producer-name");
+        this.totalReviews=document.getElementById("total-reviews");
+        this.rating=document.getElementById("rating");
+        this.reviewItem=document.querySelectorAll(".review-item");
+        this.authorsName=document.querySelectorAll(".authors-name");
+        this.authorsRating=document.querySelectorAll(".authors-rating");
+        this.commentContent=document.querySelectorAll(".comment-content");
         this.init();
     }
 
@@ -91,6 +100,7 @@ class MovieReview{
             return await response.json();
         }catch(error){
             console.error(error);
+            this.getErrorMessage("Please enter a valid movie name");
         }
     }
 
@@ -102,6 +112,7 @@ class MovieReview{
             return await response.json();
         }catch(error){
             console.error(error);
+            this.getErrorMessage("Please enter a valid movie name");
         }
     }
 
@@ -113,6 +124,7 @@ class MovieReview{
             return await response.json();
         }catch(error){
             console.error(error);
+            this.getErrorMessage("Please enter a valid movie name");
         }
     }
 
@@ -126,6 +138,9 @@ class MovieReview{
             this.getMovieTitle(movieData);
             this.getMovieImage(movieData);
             this.getMovieDescription(movieData);
+            this.getMovieDetails(movieDetailsData,movieCreditsData);
+            this.getVoteStats(movieData);
+            this.createReviewsDiv(movieReviewsData);
         }catch(error){
             console.error(error);
             this.getErrorMessage("Please enter a valid movie name");
@@ -145,6 +160,77 @@ class MovieReview{
 
     getMovieDescription(movieData){
         this.movieDescr.textContent=movieData.results[0].overview;
+    }
+
+    getMovieDetails(movieDetailsData,movieCreditsData){
+        this.releaseDate.textContent=`Release Date : ${movieDetailsData.release_date}`;
+        this.runtime.textContent=`Runtime : ${movieDetailsData.runtime} mins`;
+        this.producerName.textContent=`Producer : ${this.findDirector(movieCreditsData)}`;  
+    }
+
+    findDirector(movieCreditsData){
+        let directorName;
+
+        movieCreditsData.crew.forEach(movie=>{
+            if(movie.job==="Director"){
+                directorName= movie.original_name;
+            }
+        });
+        if(directorName===undefined)
+            directorName=movieCreditsData.crew[0].original_name;
+        return directorName;
+    }
+
+    getVoteStats(movieData){
+        this.totalReviews.innerHTML=`Total Reviews : ${movieData.results[0].vote_count} <i class="fa-solid fa-users"></i>`;
+        const ratingNumber=movieData.results[0].vote_average;
+        this.rating.textContent=`Rating : ${(movieData.results[0].vote_average).toFixed(1)} ${this.getMovieStars(ratingNumber)}`;
+    }
+
+    getMovieStars(ratingNumber){
+        if(ratingNumber>=1 && ratingNumber<3)
+            return "⭐";
+        else if(ratingNumber>=3 && ratingNumber<5)
+            return "⭐⭐";
+        else if(ratingNumber>=5 && ratingNumber<7)
+            return "⭐⭐⭐";
+        else if(ratingNumber>=7 && ratingNumber<9)
+            return "⭐⭐⭐⭐";
+        else
+            return "⭐⭐⭐⭐⭐";
+    }
+
+    createReviewsDiv(movieReviewsData){
+        const arrayLength=movieReviewsData.results.length;
+        this.hideReviewsDiv(arrayLength);
+        for(let i=0;i<arrayLength;i++){
+            if(i>5)
+                break;
+            this.reviewItem[i].style.display="flex";
+            this.getAuthorsNameAndRating(movieReviewsData,i);
+            this.getCommentContent(movieReviewsData,i);
+        }
+    }
+
+    getAuthorsNameAndRating(movieReviewsData,index){
+        this.authorsName[index].innerHTML=`User <i class="fa-solid fa-user"></i> : ${movieReviewsData.results[index].author}`;
+        const ratingNumber=movieReviewsData.results[index].author_details.rating;
+        this.authorsRating[index].innerHTML=`Rating : ${movieReviewsData.results[index].author_details.rating} 
+        ${this.getMovieStars(ratingNumber)}`;    
+    }
+
+    getCommentContent(movieReviewsData,index){
+        this.commentContent[index].innerHTML=`<i class="fa-solid fa-quote-left"></i> ${movieReviewsData.results[index].content}
+        <i class="fa-solid fa-quote-right"></i>`;
+        console.log(this.commentContent);
+    }
+
+    hideReviewsDiv(arrayLength){
+        for(let i=arrayLength;i<6;i++){
+            if(i>5)
+                break;
+            this.reviewItem[i].style.display="none";
+        }
     }
 
     getMovieId(movieData){
