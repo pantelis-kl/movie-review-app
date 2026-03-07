@@ -19,6 +19,7 @@ class MovieReview{
         this.authorsName=document.querySelectorAll(".authors-name");
         this.authorsRating=document.querySelectorAll(".authors-rating");
         this.commentContent=document.querySelectorAll(".comment-content");
+        this.createdAt=document.querySelectorAll(".created-at");
         this.init();
     }
 
@@ -101,6 +102,7 @@ class MovieReview{
         }catch(error){
             console.error(error);
             this.getErrorMessage("Please enter a valid movie name");
+            throw error;
         }
     }
 
@@ -113,6 +115,7 @@ class MovieReview{
         }catch(error){
             console.error(error);
             this.getErrorMessage("Please enter a valid movie name");
+            throw error;
         }
     }
 
@@ -125,6 +128,7 @@ class MovieReview{
         }catch(error){
             console.error(error);
             this.getErrorMessage("Please enter a valid movie name");
+            throw error;
         }
     }
 
@@ -196,8 +200,10 @@ class MovieReview{
             return "⭐⭐⭐";
         else if(ratingNumber>=7 && ratingNumber<9)
             return "⭐⭐⭐⭐";
-        else
+        else if(ratingNumber>=9)
             return "⭐⭐⭐⭐⭐";
+        else 
+            return "";
     }
 
     createReviewsDiv(movieReviewsData){
@@ -209,6 +215,7 @@ class MovieReview{
             this.reviewItem[i].style.display="flex";
             this.getAuthorsNameAndRating(movieReviewsData,i);
             this.getCommentContent(movieReviewsData,i);
+            this.getCreationTime(movieReviewsData,i);
         }
     }
 
@@ -222,6 +229,15 @@ class MovieReview{
     getCommentContent(movieReviewsData,index){
         this.commentContent[index].innerHTML=`<i class="fa-solid fa-quote-left"></i> ${movieReviewsData.results[index].content}
         <i class="fa-solid fa-quote-right"></i>`;
+    }
+
+    getCreationTime(movieReviewData,index){
+        let timeText=[...movieReviewData.results[index].created_at];
+        let fullTime="";
+        for(let i=0;i<10;i++){
+            fullTime+=timeText[i]
+        }
+        this.createdAt[index].textContent=fullTime;
     }
 
     hideReviewsDiv(arrayLength){
