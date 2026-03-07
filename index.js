@@ -222,7 +222,6 @@ class MovieReview{
     getCommentContent(movieReviewsData,index){
         this.commentContent[index].innerHTML=`<i class="fa-solid fa-quote-left"></i> ${movieReviewsData.results[index].content}
         <i class="fa-solid fa-quote-right"></i>`;
-        console.log(this.commentContent);
     }
 
     hideReviewsDiv(arrayLength){
