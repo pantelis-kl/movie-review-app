@@ -207,7 +207,7 @@ main{
     display: none;
     flex-direction: column;
     background-color: rgba(61, 61, 61, 0.521);
-    margin-top: 20px;
+    margin-bottom: 20px;
     border-radius: 20px;
 }
 
@@ -244,6 +244,18 @@ main{
     color: #fff;
     font-size: 23px;
     margin-top: 30px;
+}
+
+footer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer #releated-movies-header{
+    color: #ffff;
+    font-size: 35px;
 }
 
 @keyframes typing{
