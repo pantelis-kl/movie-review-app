@@ -21,6 +21,8 @@ class MovieReview{
         this.commentContent=document.querySelectorAll(".comment-content");
         this.createdAt=document.querySelectorAll(".created-at");
         this.reviewAuthorsHeader=document.getElementById("review-authors-header");
+        this.pageFooter=document.querySelector("footer");
+        this.releatedItems=document.querySelectorAll(".releated-item");
         this.init();
     }
 
@@ -77,7 +79,6 @@ class MovieReview{
                     const movieDetailsData=await this.fetchMovieDetailsData(movieId);
                     const movieCreditsData=await this.fetchCreditsData(movieId);
                     const movieReviewsData=await this.fetchReviewsData(movieId);
-                    console.log(movieReviewsData);
                     console.log(movieData);
                     this.callFunctions(movieData,movieDetailsData,movieCreditsData,movieReviewsData);
                 }catch(error){
@@ -140,12 +141,14 @@ class MovieReview{
             this.loadingMessage.style.display="none";
             this.errorMessage.style.display="none";
             this.moviesContainer.style.display="flex";
+            this.pageFooter.style.display="flex"
             this.getMovieTitle(movieData);
             this.getMovieImage(movieData);
             this.getMovieDescription(movieData);
             this.getMovieDetails(movieDetailsData,movieCreditsData);
             this.getVoteStats(movieData);
             this.createReviewsDiv(movieReviewsData);
+            this.createReleatedMovies(movieData);
         }catch(error){
             console.error(error);
             this.getErrorMessage("Please enter a valid movie name");
@@ -287,6 +290,38 @@ class MovieReview{
     deactivateNavabarItem(item){
         item.style.color="white";
         item.style.textDecoration="none";
+    }
+
+
+    createReleatedMovies(movieData){
+        const arrayLength=movieData.results.length;
+        this.clearReleatedMovies();
+        for(let i=1;i<arrayLength;i++){
+            const newDiv=document.createElement("div");
+            newDiv.classList="releated-item";
+            document.querySelector(".releated-movies-container").append(newDiv);
+            this.releatedItems=document.querySelectorAll(".releated-item");
+            this.createReleatedImage(newDiv,movieData,i);
+            this.createReleatedH3(newDiv,movieData,i);
+        }
+    }
+
+    createReleatedImage(newDiv,movieData,index){
+        const newImg=document.createElement("img");
+        newImg.src=`https://image.tmdb.org/t/p/w500${movieData.results[index].poster_path}`;
+        newDiv.append(newImg);
+    }
+
+    createReleatedH3(newDiv,movieData,index){
+        const newH3=document.createElement("h3");
+        newH3.textContent=movieData.results[index].title;
+        newDiv.append(newH3);
+    }
+
+    clearReleatedMovies(){
+        this.releatedItems.forEach(item=>{
+            item.remove();
+        });
     }
 }
 
