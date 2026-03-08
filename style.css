@@ -240,6 +240,12 @@ main{
     letter-spacing: 1px;
 }
 
+#review-authors-header{
+    color: #fff;
+    font-size: 23px;
+    margin-top: 30px;
+}
+
 @keyframes typing{
     from{width: 0ch;}
     to{width: 32.8ch;}

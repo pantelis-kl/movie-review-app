@@ -20,6 +20,7 @@ class MovieReview{
         this.authorsRating=document.querySelectorAll(".authors-rating");
         this.commentContent=document.querySelectorAll(".comment-content");
         this.createdAt=document.querySelectorAll(".created-at");
+        this.reviewAuthorsHeader=document.getElementById("review-authors-header");
         this.init();
     }
 
@@ -209,6 +210,7 @@ class MovieReview{
     createReviewsDiv(movieReviewsData){
         const arrayLength=movieReviewsData.results.length;
         this.hideReviewsDiv(arrayLength);
+        this.displayAuthorsHeader(arrayLength);
         for(let i=0;i<arrayLength;i++){
             if(i>5)
                 break;
@@ -217,6 +219,17 @@ class MovieReview{
             this.getCommentContent(movieReviewsData,i);
             this.getCreationTime(movieReviewsData,i);
         }
+    }
+
+    displayAuthorsHeader(arrayLength){
+        if(arrayLength===0)
+            this.reviewAuthorsHeader.textContent="This movie has no comments yet";
+        else if(arrayLength===1)
+            this.reviewAuthorsHeader.textContent="1 user commented";
+        else if(arrayLength<6)
+            this.reviewAuthorsHeader.textContent=`${arrayLength} users commented`;
+        else
+            this.reviewAuthorsHeader.textContent="6 users commented";
     }
 
     getAuthorsNameAndRating(movieReviewsData,index){
