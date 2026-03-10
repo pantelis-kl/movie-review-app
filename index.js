@@ -73,6 +73,7 @@ class MovieReview{
             item.addEventListener("click",()=>{
                 const movieId=this.getMovieId(this.movieData,index+1);
                 this.callFunctions(index,movieId);
+                document.getElementById("search-movie").scrollIntoView({behavior:'smooth'});
             });
         });
     }
@@ -153,14 +154,15 @@ class MovieReview{
         try{
             if(this.movieData.results.length===0)
                 throw new Error("cannot fetch the resource");
-            await this.getAllData(movieId)
+            await this.getAllData(movieId);
+            console.log(this.movieReviewsData);
             this.loadingMessage.style.display="none";
             this.errorMessage.style.display="none";
             this.moviesContainer.style.display="flex";
             this.pageFooter.style.display="flex"
-            this.getMovieTitle(index);
-            this.getMovieImage(index);
-            this.getMovieDescription(index);
+            this.getMovieTitle();
+            this.getMovieImage();
+            this.getMovieDescription();
             this.getMovieDetails();
             this.getVoteStats(index);
             this.createReviewsDiv();
@@ -172,17 +174,17 @@ class MovieReview{
         }
     }
 
-    getMovieTitle(index){
+    getMovieTitle(){
        this.movieTitle.textContent=this.movieDetailsData.title;
     }
 
-    getMovieImage(index){
+    getMovieImage(){
         const imageUrl=`https://image.tmdb.org/t/p/w500${this.movieDetailsData.poster_path}`;
         this.movieImage.src=imageUrl;
         this.movieImage.alt="Movie Image";
     }
 
-    getMovieDescription(index){
+    getMovieDescription(){
         this.movieDescr.textContent=this.movieDetailsData.overview
     }
 
@@ -210,9 +212,9 @@ class MovieReview{
     }
 
     getVoteStats(index){
-        this.totalReviews.innerHTML=`Total Reviews : ${this.movieData.results[index].vote_count} <i class="fa-solid fa-users"></i>`;
-        const ratingNumber=this.movieData.results[index].vote_average;
-        this.rating.textContent=`Rating : ${(this.movieData.results[index].vote_average).toFixed(1)} ${this.getMovieStars(ratingNumber)}`;
+        this.totalReviews.innerHTML=`Total Reviews : ${this.movieDetailsData.vote_count} <i class="fa-solid fa-users"></i>`;
+        const ratingNumber=this.movieDetailsData.vote_average;
+        this.rating.textContent=`Rating : ${(this.movieDetailsData.vote_average).toFixed(1)} ${this.getMovieStars(ratingNumber)}`;
     }
 
     getMovieStars(ratingNumber){
