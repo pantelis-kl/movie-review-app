@@ -21,6 +21,7 @@ class MovieReview{
         this.rating=document.getElementById("rating");
         this.reviewItem=document.querySelectorAll(".review-item");
         this.authorsName=document.querySelectorAll(".authors-name");
+        this.authorsImage=document.querySelectorAll(".authors-image");
         this.authorsRating=document.querySelectorAll(".authors-rating");
         this.commentContent=document.querySelectorAll(".comment-content");
         this.createdAt=document.querySelectorAll(".created-at");
@@ -240,10 +241,25 @@ class MovieReview{
             if(i>5)
                 break;
             this.reviewItem[i].style.display="flex";
-            this.getAuthorsNameAndRating(i);
+            this.getAuthorsRating(i);
+            this.getAuthorsImageAndName(i)
             this.getCommentContent(i);
             this.getCreationTime(i);
         }
+    }
+
+    getAuthorsImageAndName(index){
+        const avatarPath=this.movieReviewsData.results[index].author_details.avatar_path;
+        if(avatarPath!== null){
+            const imageUrl=`https://image.tmdb.org/t/p/w500${avatarPath}`;
+            this.authorsImage[index].style.display="inline";
+            this.authorsImage[index].src=imageUrl
+            this.authorsName[index].innerHTML=`User ${this.authorsImage[index].innerHTML} : ${this.movieReviewsData.results[index].author}`;
+        }else{
+            this.authorsImage[index].style.display="none";
+            this.authorsName[index].innerHTML=`<i class="fa-solid fa-user"></i> User: ${this.movieReviewsData.results[index].author}`;
+        }
+
     }
 
     displayAuthorsHeader(arrayLength){
@@ -257,8 +273,7 @@ class MovieReview{
             this.reviewAuthorsHeader.textContent="6 users commented";
     }
 
-    getAuthorsNameAndRating(index){
-        this.authorsName[index].innerHTML=`User <i class="fa-solid fa-user"></i> : ${this.movieReviewsData.results[index].author}`;
+    getAuthorsRating(index){
         const ratingNumber=this.movieReviewsData.results[index].author_details.rating;
         this.authorsRating[index].innerHTML=`Rating : ${this.movieReviewsData.results[index].author_details.rating} 
         ${this.getMovieStars(ratingNumber)}`;    
