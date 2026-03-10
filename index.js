@@ -2,6 +2,7 @@ class MovieReview{
     constructor(){
         this.apiKey=config.apiKey;
         this.navbarItems=document.querySelectorAll(".navbar-item");
+        this.topRatedLink=document.getElementById("top-rated-link");
         this.searchField=document.getElementById("search-input");
         this.searchButton=document.getElementById("search-button");
         this.errorMessage=document.getElementById("error-message");
@@ -70,12 +71,8 @@ class MovieReview{
             event.preventDefault();
         });
 
-        this.releatedItems.forEach((item,index)=>{
-            item.addEventListener("click",()=>{
-                const movieId=this.getMovieId(this.movieData,index+1);
-                this.callFunctions(index,movieId);
-                document.getElementById("search-movie").scrollIntoView({behavior:'smooth'});
-            });
+        this.topRatedLink.addEventListener("click",()=>{
+            this.fetchDataForTopRated();
         });
     }
 
@@ -145,6 +142,19 @@ class MovieReview{
         }
     }
 
+    async fetchDataForTopRated(){
+        try{
+            const response=await fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}`);
+            if(!response.ok)
+                throw new Error("No movies was founded");
+            const topRatedData=await response.json();
+            console.log(topRatedData);
+        }catch(error){
+            console.error(error);
+            this.getErrorMessage("No movies was founded");
+        }
+    }
+
     async getAllData(movieId){
         this.movieDetailsData=await this.fetchMovieDetailsData(movieId);
         this.movieCreditsData=await this.fetchCreditsData(movieId);
@@ -156,7 +166,6 @@ class MovieReview{
             if(this.movieData.results.length===0)
                 throw new Error("cannot fetch the resource");
             await this.getAllData(movieId);
-            console.log(this.movieReviewsData);
             this.loadingMessage.style.display="none";
             this.errorMessage.style.display="none";
             this.moviesContainer.style.display="flex";
@@ -165,7 +174,7 @@ class MovieReview{
             this.getMovieImage();
             this.getMovieDescription();
             this.getMovieDetails();
-            this.getVoteStats(index);
+            this.getVoteStats();
             this.createReviewsDiv();
             this.createReleatedMovies();
         }catch(error){
@@ -212,7 +221,7 @@ class MovieReview{
         }
     }
 
-    getVoteStats(index){
+    getVoteStats(){
         this.totalReviews.innerHTML=`Total Reviews : ${this.movieDetailsData.vote_count} <i class="fa-solid fa-users"></i>`;
         const ratingNumber=this.movieDetailsData.vote_average;
         this.rating.textContent=`Rating : ${(this.movieDetailsData.vote_average).toFixed(1)} ${this.getMovieStars(ratingNumber)}`;
@@ -342,7 +351,17 @@ class MovieReview{
             this.createReleatedH3(newDiv,this.movieData,i);
             this.createReleatedRating(newDiv,this.movieData,i);
         }
-        this.initializeEventListeners();
+        this.initializeReleatedItemsEventListener();    
+    }
+
+    initializeReleatedItemsEventListener(){
+        this.releatedItems.forEach((item,index)=>{
+            item.addEventListener("click",()=>{
+                const movieId=this.getMovieId(this.movieData,index+1);
+                this.callFunctions(index,movieId);
+                document.getElementById("search-movie").scrollIntoView({behavior:'smooth'});
+            });
+        });
     }
 
     createReleatedImage(newDiv,movieData,index){
