@@ -170,9 +170,9 @@ class MovieReview{
             this.errorMessage.style.display="none";
             this.moviesContainer.style.display="flex";
             this.pageFooter.style.display="flex"
-            this.getMovieTitle();
-            this.getMovieImage();
-            this.getMovieDescription();
+            this.getMovieTitle(this.movieTitle,this.movieDetailsData);
+            this.getMovieImage(this.movieImage,this.movieDetailsData);
+            this.getMovieDescription(this.movieDescr,this.movieDetailsData);
             this.getMovieDetails();
             this.getVoteStats();
             this.createReviewsDiv();
@@ -184,18 +184,18 @@ class MovieReview{
         }
     }
 
-    getMovieTitle(){
-       this.movieTitle.textContent=this.movieDetailsData.title;
+    getMovieTitle(movieTitle,movieDetailsData){
+       movieTitle.textContent=movieDetailsData.title;
     }
 
-    getMovieImage(){
-        const imageUrl=`https://image.tmdb.org/t/p/w500${this.movieDetailsData.poster_path}`;
-        this.movieImage.src=imageUrl;
-        this.movieImage.alt="Movie Image";
+    getMovieImage(movieImage,movieDetailsData){
+        const imageUrl=`https://image.tmdb.org/t/p/w500${movieDetailsData.poster_path}`;
+        movieImage.src=imageUrl;
+        movieImage.alt="Movie Image";
     }
 
-    getMovieDescription(){
-        this.movieDescr.textContent=this.movieDetailsData.overview
+    getMovieDescription(movieDescr,movieDetailsData){
+        movieDescr.textContent=movieDetailsData.overview
     }
 
     getMovieDetails(){
