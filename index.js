@@ -6,6 +6,7 @@ class MovieReview{
         this.searchField=document.getElementById("search-input");
         this.searchButton=document.getElementById("search-button");
         this.errorMessage=document.getElementById("error-message");
+        this.searchMoviesHeader=document.getElementById(".search-movies-header");
         this.movieData;
         this.movieCreditsData;
         this.movieDetailsData;
@@ -72,7 +73,12 @@ class MovieReview{
         });
 
         this.topRatedLink.addEventListener("click",()=>{
+            this.hideMoviesContainer();
             this.fetchDataForTopRated();
+        });
+
+        document.getElementById("search-movie-link").addEventListener("click",()=>{
+            this.displayMoviesContainer();
         });
     }
 
@@ -169,12 +175,12 @@ class MovieReview{
             this.loadingMessage.style.display="none";
             this.errorMessage.style.display="none";
             this.moviesContainer.style.display="flex";
-            this.pageFooter.style.display="flex"
+            this.pageFooter.style.display="flex";
             this.getMovieTitle(this.movieTitle,this.movieDetailsData);
             this.getMovieImage(this.movieImage,this.movieDetailsData);
             this.getMovieDescription(this.movieDescr,this.movieDetailsData);
             this.getMovieDetails();
-            this.getVoteStats();
+            this.getVoteStats(this.totalReviews,this.rating,this.movieDetailsData);
             this.createReviewsDiv();
             this.createReleatedMovies();
         }catch(error){
@@ -221,10 +227,10 @@ class MovieReview{
         }
     }
 
-    getVoteStats(){
-        this.totalReviews.innerHTML=`Total Reviews : ${this.movieDetailsData.vote_count} <i class="fa-solid fa-users"></i>`;
-        const ratingNumber=this.movieDetailsData.vote_average;
-        this.rating.textContent=`Rating : ${(this.movieDetailsData.vote_average).toFixed(1)} ${this.getMovieStars(ratingNumber)}`;
+    getVoteStats(totalReviews,rating,movieDetailsData){
+        totalReviews.innerHTML=`Total Reviews : ${movieDetailsData.vote_count} <i class="fa-solid fa-users"></i>`;
+        const ratingNumber=movieDetailsData.vote_average;
+        rating.textContent=`Rating : ${(movieDetailsData.vote_average).toFixed(1)} ${this.getMovieStars(ratingNumber)}`;
     }
 
     getMovieStars(ratingNumber){
@@ -389,6 +395,16 @@ class MovieReview{
         this.releatedItems.forEach(item=>{
             item.remove();
         });
+    }
+
+    hideMoviesContainer(){
+        this.moviesContainer.style.display="none";
+        this.pageFooter.style.display="none";
+        document.getElementById("search-movie").style.display="none";
+    }
+
+    displayMoviesContainer(){
+        document.getElementById("search-movie").style.display="flex";
     }
 }
 
