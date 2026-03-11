@@ -295,9 +295,30 @@ footer .releated-item h3{
     font-size:18px;
 }
 
+#top-rated{
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#top-rated #top-rated-header{
+    color: #fff;
+    font-size: 35px;
+    white-space: nowrap;
+    letter-spacing: 2px;
+    overflow: hidden;
+    animation: typing2 2s ease-in-out;
+}
+
 @keyframes typing{
     from{width: 0ch;}
     to{width: 32.8ch;}
+}
+
+@keyframes typing2{
+    from{width: 0ch;}
+    to{width: 17ch;}
 }
 
 @keyframes loadingType{

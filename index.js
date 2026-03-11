@@ -401,9 +401,11 @@ class MovieReview{
         this.moviesContainer.style.display="none";
         this.pageFooter.style.display="none";
         document.getElementById("search-movie").style.display="none";
+        document.getElementById("top-rated").style.display="flex"
     }
 
     displayMoviesContainer(){
+        document.getElementById("top-rated").style.display="none";
         document.getElementById("search-movie").style.display="flex";
     }
 }
