@@ -8,7 +8,6 @@ class MovieReview{
         this.searchField=document.getElementById("search-input");
         this.searchButton=document.getElementById("search-button");
         this.errorMessage=document.getElementById("error-message");
-        this.searchMoviesHeader=document.getElementById(".search-movies-header");
         this.movieData;
         this.movieCreditsData;
         this.movieDetailsData;
@@ -92,6 +91,7 @@ class MovieReview{
     async fetchData(movieName){
         try{
             this.loadingMessage.style.display="flex";
+            this.clearSearchInput();
             if(movieName.trim()!==""){
                 const response= await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${movieName}`);
                 if(!response.ok){
@@ -226,8 +226,12 @@ class MovieReview{
             }
         });
         try{
-        if(directorName===undefined)
-            directorName=movieCreditsData.crew[0].original_name;
+        if(directorName===undefined){
+            if(movieCreditsData.crew.length>0)
+                directorName=movieCreditsData.crew[0].original_name;
+            else
+                directorName="Unknown Producer";
+        }
         return directorName;
         }catch(error){
             console.error("Cannot find the name");
@@ -332,6 +336,10 @@ class MovieReview{
         this.errorMessage.textContent=message;
     }
 
+    clearSearchInput(){
+        this.searchField.value="";
+    }
+
     customizeNavbarItems(index){
         this.navbarItems.forEach((item,currentIndex)=>{
             if(index===currentIndex)
@@ -410,6 +418,7 @@ class MovieReview{
         topRatedData.results.forEach(async (movie,index)=>{
             const newDiv=document.createElement("div");
             newDiv.classList="top-rated-item";
+            newDiv.title="View Details";
             document.querySelector(".top-rated-container").append(newDiv);
             this.topRatedItems=document.querySelectorAll(".top-rated-item");
             const movieId=self.getMovieId(topRatedData,index);
