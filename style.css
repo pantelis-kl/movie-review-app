@@ -300,6 +300,7 @@ footer .releated-item h3{
     display: none;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 #top-rated #top-rated-header{
@@ -309,6 +310,93 @@ footer .releated-item h3{
     letter-spacing: 2px;
     overflow: hidden;
     animation: typing2 2s ease-in-out;
+}
+
+.top-rated-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-rated-container .top-rated-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 700px;
+    background-color:rgba(46, 46, 46, 0.521);
+    margin-top: 20px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.top-rated-item h1{
+    color: #fff;
+    font-size: 25px;
+}
+
+.image-text-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.image-text-container img{
+    width: 230px;
+    margin-left: 10px;
+}
+
+.image-text-container h3{
+    color: #fff;
+    margin-left: 15px;
+}
+
+.top-rated-item h4{
+    color: #fff;
+    font-size: 18px;
+}
+
+.top-rated-item .top-rated-reviews-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.top-rated-reviews-container #top-rated-rating{
+    margin-top: 14px;
+}
+
+.top-rated-reviews-container h3{
+    color: #fff;
+    margin-left: 100px;
+    font-size: 20px;
+}
+
+.top-rated-details-container{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    width: 100%;
+}
+
+.top-rated-details-container h4{
+    margin-left: 30px;
+}
+
+.top-rated-details-container h3{
+    align-self: center;
+    color: #fff;
+}
+
+.top-rated-details-container i{
+    margin-left: 50px;
+    color: rgb(39, 79, 255);
+}
+
+.top-rated-details-container #top-rated-comments{
+    cursor: pointer;
 }
 
 @keyframes typing{
