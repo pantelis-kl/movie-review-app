@@ -18,6 +18,8 @@ header{
     align-items: center;
     background-color: rgba(46, 46, 46, 0.521);
     padding: 20px;
+    position: sticky;
+    top: 0;
 }
 
 navbar ul{
@@ -33,6 +35,10 @@ navbar a{
     color:#ffff;
     margin-left: 50px;
     font-size: 25px;
+}
+
+section{
+    visibility: visible;
 }
 
 
@@ -329,6 +335,7 @@ footer .releated-item h3{
     margin-top: 20px;
     overflow: hidden;
     cursor: pointer;
+    transition: border 0.2s ease-in-out;
 }
 
 .top-rated-item h1{
@@ -397,6 +404,10 @@ footer .releated-item h3{
 
 .top-rated-details-container #top-rated-comments{
     cursor: pointer;
+}
+
+.top-rated-item:hover{
+    border: 3px solid white;
 }
 
 @keyframes typing{

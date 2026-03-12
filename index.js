@@ -2,6 +2,8 @@ class MovieReview{
     constructor(){
         this.apiKey=config.apiKey;
         this.navbarItems=document.querySelectorAll(".navbar-item");
+        this.selectedIndex;
+        this.allSections=document.querySelectorAll("section");
         this.topRatedLink=document.getElementById("top-rated-link");
         this.searchField=document.getElementById("search-input");
         this.searchButton=document.getElementById("search-button");
@@ -41,20 +43,20 @@ class MovieReview{
     }
 
     initializeEventListeners(){
-        let selectedIndex;
+        
         this.navbarItems.forEach((item,index)=>{
             item.addEventListener("click",()=>{
-                selectedIndex=index;
+                this.selectedIndex=index;
                 this.customizeNavbarItems(index);
             });
 
             //hover navbar items
             item.addEventListener("mouseover",()=>{
-                if(selectedIndex!==index)
+                if(this.selectedIndex!==index)
                     this.setActiveNavbarItem(item);
             });
             item.addEventListener("mouseout",()=>{
-                if(selectedIndex!==index)
+                if(this.selectedIndex!==index)
                     this.deactivateNavabarItem(item);
             });
         });
@@ -80,6 +82,10 @@ class MovieReview{
 
         document.getElementById("search-movie-link").addEventListener("click",()=>{
             this.displayMoviesContainer();
+        });
+
+        window.addEventListener("scroll",()=>{
+            this.checkVisibilityOnScroll();
         });
     }
 
@@ -497,10 +503,26 @@ class MovieReview{
         const self=this;
         this.topRatedItems.forEach((movie,index)=>{
             movie.addEventListener("click",()=>{
+                this.setActiveNavbarItem(this.navbarItems[0]);
+                this.deactivateNavabarItem(this.navbarItems[2]);
+                this.selectedIndex=0;
                 self.fetchData(topRatedData.results[index].title);
                 self.displayMoviesContainer();
             });
         });
+    }
+
+    checkVisibilityOnScroll(){
+        for (let i = 0; i < this.allSections.length; i++) {
+    const rect = this.allSections[i].getBoundingClientRect();
+
+    if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+        this.setActiveNavbarItem(this.navbarItems[i]);
+        this.selectedIndex = i;
+    } else {
+        this.deactivateNavabarItem(this.navbarItems[i]);
+    }
+}
     }
 
     hideMoviesContainer(){
