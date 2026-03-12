@@ -268,7 +268,14 @@
             if(element.type==="Trailer" && element.site==="YouTube")
                 return element.key;
         });
-        return trailer.key;
+        try{
+            if(trailer===undefined)
+                throw new Error("Couldnt find the trailer key")
+            else
+                return trailer.key;
+        }catch(error){
+            console.error(error);
+        }
     }
 
     createVideoElement(){
