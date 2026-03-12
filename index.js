@@ -100,7 +100,6 @@ class MovieReview{
                 }
                 this.movieData= await response.json();
                 try{
-                    console.log(this.movieData.results[0].title);
                     const movieId=this.getMovieId(this.movieData,0);
                     this.callFunctions(movieId);
                 }catch(error){
