@@ -14,6 +14,7 @@
         this.movieReviewsData;
         this.trailerData;
         this.trailerLink=document.getElementById("trailer-link");
+        this.trailerMessage=document.getElementById("trailer-message");
         this.trailerVideo=document.getElementById("trailer-video");
         this.loadingMessage=document.querySelector(".full-loading");
         this.movieTitle=document.getElementById("movie-name");
@@ -208,6 +209,7 @@
             this.pageFooter.style.display="flex";
             this.trailerVideo.style.display="none";
             this.trailerVideo.src=""
+            this.trailerMessage.style.display="none";
             this.getMovieTitle(this.movieTitle,this.movieDetailsData);
             this.getMovieImage(this.movieImage,this.movieDetailsData);
             this.getMovieDescription(this.movieDescr,this.movieDetailsData);
@@ -280,7 +282,15 @@
 
     createVideoElement(){
         const trailerKey=this.getTrailerKey();
+        this.checkTrailerKey(trailerKey);
         this.trailerVideo.src=`https://www.youtube.com/embed/${trailerKey}`;
+    }
+
+    checkTrailerKey(trailerKey){
+        if(trailerKey===undefined){
+            this.trailerMessage.style.display="block";
+            this.trailerMessage.textContent="Couldnt find the trailer";
+        }
     }
 
     getVoteStats(totalReviews,rating,movieDetailsData){
