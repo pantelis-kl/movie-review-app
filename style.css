@@ -458,3 +458,7 @@ footer .releated-item h3{
     from{width: 0ch;}
     to{width: 2ch;}
 }
+
+@media (max-width:500px){
+    
+}
