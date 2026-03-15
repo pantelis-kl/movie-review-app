@@ -30,6 +30,12 @@ nav li{
     display: inline;
 }
 
+.fa-solid.fa-bars{
+    font-size: 30px;
+    color: #fff;
+    display: none;
+}
+
 nav a{
     text-decoration: none;
     color:#ffff;
@@ -460,5 +466,226 @@ footer .releated-item h3{
 }
 
 @media (max-width:500px){
+
+    header{
+        background-color: transparent;
+        position: sticky;
+        top: 0;
+    }
     
+    .fa-solid.fa-bars{
+        display: block;
+    }
+
+    nav ul{
+        background-color:rgba(46, 46, 46, 0.521);
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        border-radius: 20px;
+    }   
+
+    nav li{
+        padding:10px;
+        width: 100%;
+    }
+
+    nav a{
+        font-size:22px; 
+        display: none;
+    }
+
+    nav i{
+        font-size: 20px
+    }
+
+    #search-movie{
+        margin-top: -20px;
+    }
+
+    #search-movie #search-movies-header{
+        font-size: 18px;
+    }
+
+    .search-container input{
+        padding: 7px;
+        width: 240px;
+        font-size: 18px;
+    }
+
+    .search-container i{
+        font-size: 22px;
+    }
+
+    #error-message{
+        font-size: 15px;
+    }
+
+    .full-loading h3{
+        font-size: 18px;
+    }
+
+    .movies-container{
+        width: 90%;
+        margin-bottom: -40px;
+    }
+
+    .movies-container #movie-name{
+        font-size: 27px;
+    }
+
+    .movies-container .image-text-container img{
+        width: 190px;
+        height: 350px;
+        margin-left: 5px;
+    }
+
+    .movies-container .image-text-container h3{
+        font-size: 16px;
+        margin-left: 20px;
+    }
+
+    .movies-container .movie-details{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .movies-container .movie-details h3{
+        font-size: 15px;
+        margin-top: 0px;
+    }
+
+    .movies-container #trailer-link{
+        padding: 10px;
+        font-size: 20px;
+    }
+
+    .movies-container iframe{
+        width: 300px;
+        height: 150px;
+    }
+
+    .movies-container #trailer-message{
+        font-size: 16px;
+        margin-top: -10px;
+    }
+
+    .movies-container #reviews-header{
+        font-size: 25px;
+    }
+
+    #reviews .review-stats{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 15px;
+        margin-top: -20px;
+    }
+
+    .review-stats #rating{
+        margin-top: -10px;
+    }
+
+    #reviews #review-authors-header{
+        font-size: 20px
+    }
+
+    .review-item{
+        overflow: hidden;
+    }
+
+    .review-item h3{
+        font-size: 17px;
+    }
+
+    .rating-name-cont h3{
+        font-size: 16px;
+    }
+
+    .review-item .created-at{
+        font-size: 15px;
+    }
+
+    footer .releated-movies-container{
+        grid-template-columns: repeat(20,1fr);
+    }
+
+    footer .releated-item{
+        width: 230px;
+    }
+
+    footer .releated-item img{
+        width: 230px;
+    }
+
+    footer .releated-item h3{
+        font-size: 16px;
+    }
+
+    footer #releated-movies-header{
+        font-size: 28px;
+    }
+
+    #top-rated #top-rated-header{
+        font-size: 28px;
+        margin-top: -20px;
+    }
+
+    .top-rated-container .top-rated-item{
+        width: 90%;
+    }
+
+    .top-rated-item h1{
+        font-size: 21px;
+    }
+
+    .image-text-container img{
+        width: 190px;
+        height: 350px;
+        margin-left: 5px;
+    }
+
+    .image-text-container h3{
+        font-size: 16px;
+    }
+
+    .top-rated-item .top-rated-reviews-container{
+        flex-direction: column;
+    }
+
+    .top-rated-reviews-container #top-rated-rating{
+        margin-top: -5px;
+    }
+
+    .top-rated-reviews-container h3{
+        font-size: 17px;
+        align-self: flex-start;
+    }
+
+    .top-rated-details-container h4{
+        margin-top: -5px;
+    }
+
+    .top-rated-details-container{
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .top-rated-details-container .fa-solid.fa-comment{
+        transform: translate(-30px,20px);
+    }
+
+    .top-rated-details-container .fa-solid.fa-eye{
+        transform: translate(10px,20px);
+    }
 }

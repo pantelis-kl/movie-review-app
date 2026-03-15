@@ -2,12 +2,14 @@
     constructor(){
         this.apiKey=config.apiKey;
         this.navbarItems=document.querySelectorAll(".navbar-item");
+        this.hamburgerButton=document.querySelector(".fa-solid.fa-bars")
         this.selectedIndex;
         this.allSections=document.querySelectorAll("section");
         this.topRatedLink=document.getElementById("top-rated-link");
         this.searchField=document.getElementById("search-input");
         this.searchButton=document.getElementById("search-button");
         this.errorMessage=document.getElementById("error-message");
+        this.timesEntered=0;
         this.movieData;
         this.movieCreditsData;
         this.movieDetailsData;
@@ -95,6 +97,24 @@
         this.trailerLink.addEventListener("click",()=>{
             this.trailerVideo.style.display="block";    
             this.createVideoElement();
+        });
+
+        this.hamburgerButton.addEventListener("click",event=>{
+            if(this.timesEntered===0)
+                document.querySelector("ul").style.display="none";
+            this.timesEntered++;
+                if(document.querySelector("ul").style.display==="none"){
+                    this.animateHamburgerContent("0px","200px","forwards");
+                    document.querySelector("ul").style.display="flex";
+                }else{
+                    document.querySelector("ul").style.display="none";
+                }
+            setTimeout(()=>{
+                if(document.querySelector("ul").style.display==="flex")
+                    document.querySelector("ul").querySelectorAll("a").forEach(link=>link.style.display="block");
+                else
+                    document.querySelector("ul").querySelectorAll("a").forEach(link=>link.style.display="none");
+            },800);
         });
     }
 
@@ -596,6 +616,17 @@
     displayMoviesContainer(){
         document.getElementById("top-rated").style.display="none";
         document.getElementById("search-movie").style.display="flex";
+    }
+
+    animateHamburgerContent(minHeight,maxHeight,fill){
+        document.querySelector("ul").animate([
+            {height:minHeight},
+            {height:maxHeight}
+        ],{
+            duration:800,
+            easing:"ease-in-out",
+            fill:fill
+        })
     }
 }
 
