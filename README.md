@@ -4,25 +4,25 @@ A vanilla JavaScript movie discovery app built with the TMDB API. Search for mov
 
 ## Features
 
-1.Search any movie by name
-2.View movie image and description
-3.View movie details — release date, runtime, director
-4.Watch official YouTube trailers
-5.Read up to 6 user reviews with author images and ratings
-6.Browse related movies from your search
-7.Top Rated movies page
-8.Star rating system
-9.Fully responsive with hamburger menu on mobile
-10.Smooth scroll navbar with active state tracking
-11.Typing animation on search header and top rated header
+1. Search any movie by name
+2 .View movie image and description
+3. View movie details — release date, runtime, director
+4. Watch official YouTube trailers
+5. Read up to 6 user reviews with author images and ratings
+6. Browse related movies from your search
+7. Top Rated movies page
+8. Star rating system
+9. Fully responsive with hamburger menu on mobile
+10. Smooth scroll navbar with active state tracking
+11. Typing animation on search header and top rated header
 
 ## Tech Stack
 
-HTML5
-CSS3
-Vanilla JavaScript
-TMDB API
-Font awesome icons
+ HTML5
+ CSS3
+ Vanilla JavaScript
+ TMDB API
+ Font awesome icons
 
 ## Get Started
 
